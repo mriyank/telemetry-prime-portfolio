@@ -1,7 +1,10 @@
 import { createApp } from "vinxi";
-import { tanstackBuildConfig } from "@lovable.dev/vite-tanstack-config";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
+import lovableConfigPkg from "@lovable.dev/vite-tanstack-config";
+
+// Destructure the configuration dynamically to bypass the ESM/CommonJS named export restriction
+const tanstackBuildConfig = lovableConfigPkg.tanstackBuildConfig || lovableConfigPkg;
 
 export default createApp({
   routers: [
@@ -19,8 +22,8 @@ export default createApp({
       plugins: () => [
         react(),
         tsconfigPaths(),
-        tanstackBuildConfig()
-      ],
+        typeof tanstackBuildConfig === 'function' ? tanstackBuildConfig() : null
+      ].filter(Boolean),
     },
   ],
 });
