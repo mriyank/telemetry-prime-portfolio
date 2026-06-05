@@ -4,9 +4,8 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vinxi dev",
-    "build": "tanstack-router generate && vite build",
-    "start": "vinxi start",
+    "dev": "vite",
+    "build": "bunx tanstack-router generate && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
