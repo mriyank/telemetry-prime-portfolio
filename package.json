@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "bunx tanstack-router generate && vite build",
+    "build": "bun run tsr generate && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
