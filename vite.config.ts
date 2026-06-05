@@ -1,19 +1,19 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { tanstackBuildConfig } from "@lovable.dev/vite-tanstack-config";
-import { nitro } from "nitro/vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [
-    react(),
-    nitro({
-      preset: "vercel", // Injects native Vercel Edge mapping layout targets
+    TanStackRouterVite({
+      routesDirectory: "./src/routes", // Explicitly points Vite to your routes folder
+      generatedRouteTree: "./src/routeTree.gen.ts",
     }),
-    mode === 'development' && tanstackBuildConfig(),
-  ].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": "/src",
-    },
-  },
-}));
+    react(),
+    tsconfigPaths()
+  ],
+  build: {
+    outDir: "dist", // Dumps all 1,910 modules into a single flat output folder
+    emptyOutDir: true,
+  }
+});
