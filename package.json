@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "bun run tsr generate && vite build",
+    "build": "bun x tsr generate && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
